@@ -1,46 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google+</title>
-
-    <!-- Initial Favicon -->
-    <link id="favicon" rel="icon" href="https://pngimg.com/d/chrome_logo_PNG18.png" />
+    <title>Unblocked Games</title>
+    
+    <!-- Favicon -->
+    <link id="favicon" rel="icon" href="https://pngimg.com/d/chrome_logo_PNG18.png">
 
     <script>
-        // Password Protection
-        function checkPassword() {
-            const correctPassword = "devkey212838"; // Change this to your desired password
-            const userInput = prompt("Enter Password to Access:");
-            if (userInput !== correctPassword) {
-                alert("Incorrect Password!");
-                window.location.href = "https://www.google.com"; // Redirect if incorrect
-            }
+        // Function to change favicon and tab title
+        function changeTabInfo(iconURL, newTitle) {
+            const favicon = document.getElementById('favicon') || document.createElement('link');
+            favicon.id = 'favicon';
+            favicon.rel = 'icon';
+            favicon.href = iconURL;
+            document.head.appendChild(favicon);
+
+            document.title = newTitle;
+
+            // Save to localStorage for persistence
+            localStorage.setItem('selectedIcon', iconURL);
+            localStorage.setItem('selectedTitle', newTitle);
         }
 
-        // Run password check on page load
-        window.onload = checkPassword;
-    </script>
+        // Restore saved favicon and title on load
+        window.addEventListener('load', () => {
+            const savedIcon = localStorage.getItem('selectedIcon');
+            const savedTitle = localStorage.getItem('selectedTitle');
 
+            if (savedIcon) {
+                changeTabInfo(savedIcon, savedTitle);
+            }
+        });
+    </script>
+    
     <style>
+        /* Global Styles */
         body {
-            background-color: black;
+            background-color: #121212;
+            color: white;
+            margin: 0;
             font-family: Arial, sans-serif;
+        }
+
+        header {
+            background-color: #0a8e29;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #0a8e29;
+        }
+
+        main {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .game-container {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .game-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .game-title {
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #333;
             color: white;
             text-align: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 0;
         }
 
-        .light-mode {
-            background-color: white;
-            color: black;
+        /* Fullscreen Game Container */
+        .fullscreen-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .fullscreen-container iframe {
+            width: 90%;
+            height: 90%;
+            border: none;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            border-radius: 5px;
+        }
+
+        .close-btn:hover {
+            background: darkred;
         }
 
         /* Settings Icon */
@@ -63,39 +166,34 @@
             box-shadow: 0 4px 6px rgba(0, 255, 0, 0.7);
         }
     </style>
-
-    <script>
-        function toggleSettings(visible) {
-            const settingsPopup = document.getElementById('settings-popup');
-            settingsPopup.style.display = visible ? 'block' : 'none';
-        }
-
-        function changeTabInfo(iconURL, newTitle) {
-            const favicon = document.getElementById('favicon') || document.createElement('link');
-            favicon.id = 'favicon';
-            favicon.rel = 'icon';
-            favicon.href = iconURL;
-            document.head.appendChild(favicon);
-            document.title = newTitle;
-            localStorage.setItem('selectedIcon', iconURL);
-            localStorage.setItem('selectedTitle', newTitle);
-        }
-    </script>
 </head>
-
 <body>
-    <h1>GooglePlus</h1>
+    <header>
+        <h1>Unblocked Games</h1>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="#">Games</a>
+        </div>
+    </header>
+    
+    <main>
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/racing-limits')">
+            <div class="game-title">Racing Limits</div>
+        </div>
+        
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/football-battle')">
+            <div class="game-title">Football Battle</div>
+        </div>
+    </main>
+
+    <div id="fullscreen-container" class="fullscreen-container">
+        <button class="close-btn" onclick="closeFullscreenGame()">Close</button>
+        <iframe id="fullscreen-iframe" allowfullscreen allow="gamepad *;"></iframe>
+    </div>
 
     <!-- Settings Icon -->
     <div class="settings-icon" onmouseover="toggleSettings(true)" onmouseout="toggleSettings(false)">
         ⚙️
     </div>
-
-    <!-- Settings Popup -->
-    <div id="settings-popup" class="settings-popup" onmouseover="toggleSettings(true)" onmouseout="toggleSettings(false)">
-        <h3>Settings</h3>
-        <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    </div>
 </body>
-
 </html>
