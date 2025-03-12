@@ -183,6 +183,11 @@
             const settingsIcon = document.querySelector('.settings-icon');
             settingsIcon.classList.toggle('active');
         }
+
+        function changeTabInfo(faviconUrl, title) {
+            document.getElementById("favicon").href = faviconUrl;
+            document.title = title;
+        }
     </script>
 </head>
 <body>
@@ -210,9 +215,14 @@
             <div class="game-title">Football Battle</div>
         </div>
 
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/minecraft-classic')">
-            <img class="game-preview" src="https://via.placeholder.com/280x180?text=Minecraft+Classic" alt="Minecraft Classic">
-            <div class="game-title">Minecraft Classic</div>
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/super-basketball')">
+            <img class="game-preview" src="https://via.placeholder.com/280x180?text=Super+Basketball" alt="Super Basketball">
+            <div class="game-title">Super Basketball</div>
+        </div>
+
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/tank-trouble')">
+            <img class="game-preview" src="https://via.placeholder.com/280x180?text=Tank+Trouble" alt="Tank Trouble">
+            <div class="game-title">Tank Trouble</div>
         </div>
     </main>
 
