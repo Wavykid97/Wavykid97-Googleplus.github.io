@@ -9,6 +9,21 @@
     <!-- Initial Favicon -->
     <link id="favicon" rel="icon" href="https://pngimg.com/d/chrome_logo_PNG18.png" />
 
+    <script>
+        // Password Protection
+        function checkPassword() {
+            const correctPassword = "devkey212838"; // Change this to your desired password
+            const userInput = prompt("Enter Password to Access:");
+            if (userInput !== correctPassword) {
+                alert("Incorrect Password!");
+                window.location.href = "https://www.google.com"; // Redirect if incorrect
+            }
+        }
+
+        // Run password check on page load
+        window.onload = checkPassword;
+    </script>
+
     <style>
         body {
             background-color: black;
@@ -23,7 +38,6 @@
             margin: 0;
         }
 
-        /* Light mode styles */
         .light-mode {
             background-color: white;
             color: black;
@@ -48,166 +62,24 @@
             color: #0A8E29;
             box-shadow: 0 4px 6px rgba(0, 255, 0, 0.7);
         }
-
-        /* Settings Popup */
-        .settings-popup {
-            display: none;
-            position: fixed;
-            top: 50px;
-            right: 20px;
-            background-color: #333;
-            color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-            z-index: 2;
-            width: 250px;
-        }
-
-        .settings-popup button {
-            background-color: #0A8E29;
-            color: white;
-            border: none;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-
-        .settings-popup button:hover {
-            background-color: #075B1A;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .dropbtn {
-            background-color: #0A8E29;
-            color: black;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            width: 100%;
-        }
-
-        .dropbtn:hover {
-            background-color: #075B1A;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #333;
-            min-width: 200px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-            z-index: 1;
-            width: 100%;
-        }
-
-        .dropdown-content button {
-            background: none;
-            color: white;
-            border: none;
-            padding: 10px;
-            text-align: left;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .dropdown-content button:hover {
-            background-color: #555;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        a {
-            color: #0A8E29;
-            text-decoration: none;
-            margin-top: 20px;
-            display: inline-block;
-        }
-
-        a:hover {
-            text-decoration: underline;
-        }
-
-        .container {
-            text-align: center;
-            margin-top: 30px;
-        }
-
-        .page {
-            display: none;
-        }
-
-        .active {
-            display: block;
-        }
     </style>
 
     <script>
-        // Handle dark mode and light mode
-        function toggleDarkMode() {
-            document.body.classList.toggle('light-mode');
-            localStorage.setItem('mode', document.body.classList.contains('light-mode') ? 'light' : 'dark');
-        }
-
-        // Restore settings on page load
-        window.addEventListener('load', () => {
-            if (localStorage.getItem('mode') === 'light') {
-                document.body.classList.add('light-mode');
-            }
-
-            const savedIcon = localStorage.getItem('selectedIcon');
-            const savedTitle = localStorage.getItem('selectedTitle');
-
-            if (savedIcon && savedTitle) {
-                changeTabInfo(savedIcon, savedTitle);
-            }
-        });
-
-        // Toggle settings popup
         function toggleSettings(visible) {
-            document.getElementById('settings-popup').style.display = visible ? 'block' : 'none';
+            const settingsPopup = document.getElementById('settings-popup');
+            settingsPopup.style.display = visible ? 'block' : 'none';
         }
 
-        // Change favicon and tab title
         function changeTabInfo(iconURL, newTitle) {
-            document.getElementById('favicon').href = iconURL;
+            const favicon = document.getElementById('favicon') || document.createElement('link');
+            favicon.id = 'favicon';
+            favicon.rel = 'icon';
+            favicon.href = iconURL;
+            document.head.appendChild(favicon);
             document.title = newTitle;
             localStorage.setItem('selectedIcon', iconURL);
             localStorage.setItem('selectedTitle', newTitle);
         }
-
-        // Panic button (redirect to Google Classroom)
-        function triggerPanicButton() {
-            window.location.href = 'https://classroom.google.com';
-        }
-
-        // Set a custom keybind for the panic button
-        function setPanicKeybind() {
-            const keybind = prompt('Enter the key you want to use for the Panic Button:');
-            if (keybind) {
-                localStorage.setItem('panicKey', keybind.toLowerCase());
-            }
-        }
-
-        // Listen for key presses to trigger the panic button
-        window.addEventListener('keydown', (e) => {
-            if (e.key.toLowerCase() === localStorage.getItem('panicKey')) {
-                triggerPanicButton();
-            }
-        });
     </script>
 </head>
 
@@ -223,30 +95,6 @@
     <div id="settings-popup" class="settings-popup" onmouseover="toggleSettings(true)" onmouseout="toggleSettings(false)">
         <h3>Settings</h3>
         <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
-
-        <!-- Tab Cloaking Dropdown -->
-        <div class="dropdown">
-            <button class="dropbtn">Select a Tab Cloak</button>
-            <div class="dropdown-content">
-                <button onclick="changeTabInfo('https://cdn.iconscout.com/icon/free/png-256/free-google-drive-logo-icon-download-in-svg-png-gif-file-formats--workspace-logos-icons-2416659.png?f=webp', 'My Drive - Google Drive')">Google Drive</button>
-                <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png', 'Google Classroom')">Google Classroom</button>
-                <button onclick="changeTabInfo('https://cdn-icons-png.flaticon.com/512/1384/1384060.png', 'YouTube')">YouTube</button>
-                <button onclick="changeTabInfo('https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-512.png', 'Netflix')">Netflix</button>
-            </div>
-        </div>
-
-        <button onclick="setPanicKeybind()">Set Panic Button Keybind</button>
-    </div>
-
-    <!-- Panic Button -->
-    <div>
-        <button onclick="triggerPanicButton()">Panic Button</button>
-    </div>
-
-    <!-- Page Content -->
-    <div class="container">
-        <h1>Welcome to GooglePlus</h1>
-        <p>Use the settings icon to change appearance, tab info, and panic keybind.</p>
     </div>
 </body>
 
