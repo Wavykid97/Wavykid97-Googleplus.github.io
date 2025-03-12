@@ -48,6 +48,44 @@
             color: #0a8e29;
         }
 
+        .settings-icon {
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+            margin-left: 20px;
+        }
+
+        .settings-menu {
+            display: none;
+            position: absolute;
+            top: 70px;
+            right: 40px;
+            background-color: #333;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            width: 250px;
+        }
+
+        .settings-menu button {
+            background: none;
+            border: none;
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            width: 100%;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .settings-menu button:hover {
+            background-color: #555;
+        }
+
+        .settings-icon.active + .settings-menu {
+            display: block;
+        }
+
         main {
             padding: 40px;
             display: grid;
@@ -63,11 +101,18 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
+            text-align: center;
         }
 
         .game-container:hover {
             transform: scale(1.05);
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .game-preview {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
         }
 
         .game-title {
@@ -76,7 +121,6 @@
             font-weight: bold;
             background-color: #333;
             color: white;
-            text-align: center;
         }
 
         /* Fullscreen Game Container */
@@ -134,6 +178,11 @@
             gameFrame.src = '';
             fullscreenDiv.style.display = 'none';
         }
+
+        function toggleSettingsMenu() {
+            const settingsIcon = document.querySelector('.settings-icon');
+            settingsIcon.classList.toggle('active');
+        }
     </script>
 </head>
 <body>
@@ -142,35 +191,27 @@
         <div class="nav">
             <a href="index.html">Home</a>
             <a href="#">Games</a>
+            <span class="settings-icon" onclick="toggleSettingsMenu()">⚙️</span>
+            <div class="settings-menu">
+                <button onclick="changeTabInfo('https://www.youtube.com/favicon.ico', 'YouTube')">YouTube</button>
+                <button onclick="changeTabInfo('https://www.scdn.co/i/_global/favicon.png', 'Spotify')">Spotify</button>
+            </div>
         </div>
     </header>
     
     <main>
         <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/racing-limits')">
+            <img class="game-preview" src="https://via.placeholder.com/280x180?text=Racing+Limits" alt="Racing Limits">
             <div class="game-title">Racing Limits</div>
         </div>
-        
+
         <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/football-battle')">
+            <img class="game-preview" src="https://via.placeholder.com/280x180?text=Football+Battle" alt="Football Battle">
             <div class="game-title">Football Battle</div>
         </div>
 
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/super-basketball')">
-            <div class="game-title">Super Basketball</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/tank-trouble')">
-            <div class="game-title">Tank Trouble</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/slope-run-game')">
-            <div class="game-title">Slope Run Game</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/wormax-io')">
-            <div class="game-title">Wormax.io</div>
-        </div>
-
         <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/minecraft-classic')">
+            <img class="game-preview" src="https://via.placeholder.com/280x180?text=Minecraft+Classic" alt="Minecraft Classic">
             <div class="game-title">Minecraft Classic</div>
         </div>
     </main>
