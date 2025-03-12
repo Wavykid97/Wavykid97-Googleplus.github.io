@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+
+    <!-- Initial Favicon -->
+    <link id="favicon" rel="icon" href="https://pngimg.com/d/chrome_logo_PNG18.png" />
+
+   
+   
+    <style>
+        body {
+            background-color: black;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Light mode styles */
+        .light-mode {
+            background-color: white;
+            color: black;
+        }
+
+        h1 {
+            color: #0A8E29;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .settings-section {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .settings-section h2 {
+            margin-top: 0;
+        }
+
+        .settings-section button,
+        .dropdown button {
+            background-color: #0A8E29;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+
+        .settings-section button:hover,
+        .dropdown button:hover {
+            background-color: #075B1A;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            z-index: 1;
+            width: 100%;
+        }
+
+        .dropdown-content button {
+            background: none;
+            color: white;
+            border: none;
+            padding: 10px;
+            text-align: left;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .dropdown-content button:hover {
+            background-color: #555;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .navigation-buttons a {
+            color: white;
+            background-color: #0A8E29;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 5px;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .navigation-buttons a:hover {
+            background-color: #075B1A;
+        }
+    </style>
+
+    <script>
+        // Handle dark mode and light mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+            const currentMode = document.body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('mode', currentMode);
+        }
+
+        // Check for saved mode preference
+        window.addEventListener('load', () => {
+            const savedMode = localStorage.getItem('mode');
+            if (savedMode === 'light') {
+                document.body.classList.add('light-mode');
+            }
+
+            // Restore the saved favicon and title
+            const savedIcon = localStorage.getItem('selectedIcon');
+            const savedTitle = localStorage.getItem('selectedTitle');
+
+            if (savedIcon) {
+                changeTabInfo(savedIcon, savedTitle);
+            }
+        });
+
+        // Change favicon and tab title
+        function changeTabInfo(iconURL, newTitle) {
+            const favicon = document.getElementById('favicon') || document.createElement('link');
+            favicon.id = 'favicon';
+            favicon.rel = 'icon';
+            favicon.href = iconURL;
+            document.head.appendChild(favicon);
+
+            document.title = newTitle;
+
+            // Save to localStorage for persistence
+            localStorage.setItem('selectedIcon', iconURL);
+            localStorage.setItem('selectedTitle', newTitle);
+        }
+
+        // Panic button (redirect to Google Classroom)
+        function triggerPanicButton() {
+            window.location.href = 'https://classroom.google.com';
+        }
+
+        // Set a custom keybind for the panic button
+        function setPanicKeybind() {
+            const keybind = prompt('Enter the key you want to use for the Panic Button:');
+            if (keybind) {
+                localStorage.setItem('panicKey', keybind.toLowerCase());
+            }
+        }
+
+        // Listen for key presses to trigger the panic button
+        window.addEventListener('keydown', (e) => {
+            const savedPanicKey = localStorage.getItem('panicKey');
+            if (savedPanicKey && e.key.toLowerCase() === savedPanicKey) {
+                triggerPanicButton();
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Settings</h1>
+
+        <!-- Dark Mode Toggle Section -->
+        <div class="settings-section">
+            <h2>Dark Mode</h2>
+            <button onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        </div>
+
+        <!-- Tab Cloaking Section -->
+        <div class="settings-section">
+            <h2>Tab Cloaking</h2>
+            <div class="dropdown">
+                <button>Select a Tab Cloak</button>
+                <div class="dropdown-content">
+                    <button onclick="changeTabInfo('https://cdn.iconscout.com/icon/free/png-256/free-google-drive-logo-icon-download-in-svg-png-gif-file-formats--workspace-logos-icons-2416659.png?f=webp', 'My Drive - Google Drive')">Google Drive</button>
+                    <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png', 'Google')">Google</button>
+                    <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png', 'Google Classroom')">Google Classroom</button>
+                    <button onclick="changeTabInfo('https://cdn-icons-png.flaticon.com/512/1384/1384060.png', 'YouTube')">YouTube</button>
+                    <button onclick="changeTabInfo('https://cdn4.iconfinder.com/data/icons/logos-and-brands/512/227_Netflix_logo-512.png', 'Netflix')">Netflix</button>
+                    <button onclick="changeTabInfo('https://www.scdn.co/i/_global/favicon.png', 'Spotify')">Spotify</button>
+                    <button onclick="changeTabInfo('https://cdn-icons-png.flaticon.com/512/5968/5968517.png', 'Google Docs')">Google Docs</button>
+                    <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg/1101px-Microsoft_Office_Outlook_%282018%E2%80%93present%29.svg.png', 'Outlook Mail')">Outlook</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panic Button Keybind Section -->
+        <div class="settings-section">
+            <h2>Panic Button</h2>
+            <button onclick="setPanicKeybind()">Set Panic Button Keybind</button>
+        </div>
+
+        <!-- Panic Button -->
+        <div class="settings-section">
+            <button onclick="triggerPanicButton()">Trigger Panic Button</button>
+        </div>
+
+        <!-- Navigation Links to Pages inside Settings -->
+        <div class="navigation-buttons">
+            <a href="page1.html" title="View the content of Page 1">Go to Page 1</a>
+            <a href="page2.html" title="Explore the content of Page 2">Go to Page 2</a>
+            <a href="page3.html" title="Learn more about Page 3">Go to Page 3</a>
+        </div>
+    </div>
+</body>
+
+</html>
