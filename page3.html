@@ -1,263 +1,187 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unblocked Games</title>
-    <link
-      id="favicon"
-      rel="icon"
-      href="https://pngimg.com/d/chrome_logo_PNG18.png"
-    />
-   
-   
-   
+    <link id="favicon" rel="icon" href="https://pngimg.com/d/chrome_logo_PNG18.png">
+    
     <style>
-      /* Global Styles */
-      body {
-        background-color: #121212;
-        color: white;
-        margin: 0;
-        font-family: Arial, sans-serif;
-      }
+        /* Global Styles */
+        body {
+            background-color: #121212;
+            color: white;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
-      header {
-        background-color: #0a8e29;
-        padding: 20px 40px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      }
-
-      header h1 {
-        margin: 0;
-        font-size: 28px;
-        font-weight: bold;
-        color: white;
-      }
-
-      .nav {
-        display: flex;
-        align-items: center;
-      }
-
-      .nav a {
-        color: white;
-        text-decoration: none;
-        margin: 0 15px;
-        font-size: 16px;
-        transition: all 0.3s ease;
-      }
-
-      .nav a:hover {
-        color: #0a8e29;
-      }
-
-      .settings-icon {
-        font-size: 24px;
-        cursor: pointer;
-        color: white;
-        margin-left: 20px;
-      }
-
-      .settings-menu {
-        display: none;
-        position: absolute;
-        top: 70px;
-        right: 40px;
-        background-color: #333;
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-        z-index: 1;
-        width: 250px;
-      }
-
-      .settings-menu button {
-        background: none;
-        border: none;
-        color: white;
-        padding: 12px 15px;
-        text-align: left;
-        width: 100%;
-        cursor: pointer;
-        font-size: 14px;
-      }
-
-      .settings-menu button:hover {
-        background-color: #555;
-      }
-
-      .settings-icon.active + .settings-menu {
-        display: block;
-      }
-
-      /* Main Content: Grid of Games */
-      main {
-        padding: 40px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 25px;
-        margin-bottom: 30px;
-      }
-
-      .game-container {
-        background-color: #1e1e1e;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        transition: transform 0.3s, box-shadow 0.3s;
-      }
-
-      .game-container:hover {
-        transform: scale(1.05);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
-      }
-
-      .game-iframe {
-        width: 100%;
-        height: 300px;
-        border: none;
-      }
-
-      .game-title {
-        padding: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        background-color: #333;
-        color: white;
-        text-align: center;
-      }
-
-      footer {
-        text-align: center;
-        padding: 20px;
-        background-color: #0a8e29;
-        font-size: 16px;
-        color: white;
-        border-top: 2px solid #333;
-      }
-
-      /* Responsive Design */
-      @media screen and (max-width: 768px) {
         header {
-          flex-direction: column;
-          align-items: flex-start;
+            background-color: #0a8e29;
+            padding: 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
         }
 
         .nav {
-          margin-top: 10px;
+            display: flex;
+            align-items: center;
         }
 
         .nav a {
-          margin: 5px 0;
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 16px;
+            transition: all 0.3s ease;
         }
 
-        .game-iframe {
-          height: 200px;
+        .nav a:hover {
+            color: #0a8e29;
         }
-      }
+
+        main {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .game-container {
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .game-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.8);
+        }
+
+        .game-title {
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #333;
+            color: white;
+            text-align: center;
+        }
+
+        /* Fullscreen Game Container */
+        .fullscreen-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            flex-direction: column;
+        }
+
+        .fullscreen-container iframe {
+            width: 90%;
+            height: 90%;
+            border: none;
+        }
+
+        .close-btn {
+            background: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            border-radius: 5px;
+        }
+
+        .close-btn:hover {
+            background: darkred;
+        }
     </style>
+
     <script>
-      // Function to change the favicon and title, and save them in localStorage
-      function changeTabInfo(iconURL, newTitle) {
-        const favicon = document.getElementById('favicon') || document.createElement('link');
-        favicon.id = 'favicon';
-        favicon.rel = 'icon';
-        favicon.href = iconURL;
-        document.head.appendChild(favicon);
+        function openFullscreenGame(gameUrl) {
+            const fullscreenDiv = document.getElementById('fullscreen-container');
+            const gameFrame = document.getElementById('fullscreen-iframe');
 
-        document.title = newTitle;
+            gameFrame.src = gameUrl;
+            fullscreenDiv.style.display = 'flex';
+        }
 
-        // Save the current settings to localStorage
-        localStorage.setItem('selectedIcon', iconURL);
-        localStorage.setItem('selectedTitle', newTitle);
-      }
+        function closeFullscreenGame() {
+            const fullscreenDiv = document.getElementById('fullscreen-container');
+            const gameFrame = document.getElementById('fullscreen-iframe');
 
-      // Toggle the settings menu
-      function toggleSettingsMenu() {
-        const settingsIcon = document.querySelector('.settings-icon');
-        settingsIcon.classList.toggle('active');
-      }
-
-      // Restore saved favicon and title after the DOM loads
-      document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-          const savedIcon = localStorage.getItem('selectedIcon');
-          const savedTitle = localStorage.getItem('selectedTitle');
-          
-          if (savedIcon) {
-            changeTabInfo(savedIcon, savedTitle || document.title);
-          }
-        }, 300); // Delay to accommodate environments like Mimo
-      });
+            gameFrame.src = '';
+            fullscreenDiv.style.display = 'none';
+        }
     </script>
-  </head>
-  <body>
+</head>
+<body>
     <header>
-      <h1>Unblocked Games</h1>
-      <div class="nav">
-        <a href="page1.html">Home</a> <a href="#">Games</a>
-        <span class="settings-icon" onclick="toggleSettingsMenu()">⚙️</span>
-        <div class="settings-menu">
-          <button onclick="changeTabInfo('https://cdn.iconscout.com/icon/free/png-256/free-google-drive-logo-icon-download-in-svg-png-gif-file-formats--workspace-logos-icons-2416659.png?f=webp', 'My Drive - Google Drive')">Google Drive</button>
-          <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/768px-Google_%22G%22_logo.svg.png', 'Google')">Google</button>
-          <button onclick="changeTabInfo('https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png', 'Google Classroom')">Google Classroom</button>
-          <button onclick="changeTabInfo('https://www.youtube.com/s/desktop/e44caae7/img/favicon_32x32.png', 'YouTube')">YouTube</button>
-          <button onclick="changeTabInfo('https://assets.nflxext.com/us/icons/nficon2016_32.ico', 'Netflix')">Netflix</button>
-          <button onclick="changeTabInfo('https://www.scdn.co/i/_global/favicon.png', 'Spotify')">Spotify</button>
-          <button onclick="changeTabInfo('https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png', 'Google Docs')">Google Docs</button>
-          <button onclick="changeTabInfo('https://outlook-1.cdn.office.net/owamail/20240116002.04/resources/images/favicons/mail/favicon.ico', 'Outlook Mail')">Outlook</button>
+        <h1>Unblocked Games</h1>
+        <div class="nav">
+            <a href="index.html">Home</a>
+            <a href="#">Games</a>
         </div>
-      </div>
     </header>
     
     <main>
-      <!-- Game 1 -->
-      <div class="game-container">
-        <div class="game-title">Racing Limits</div>
-        <iframe class="game-iframe" src="https://www.crazygames.com/embed/racing-limits" allowfullscreen allow="gamepad *;"></iframe>
-      </div>
-      
-      <!-- Game 2 -->
-      <div class="game-container">
-        <div class="game-title">We Become What We Behold</div>
-        <iframe class="game-iframe" src="https://www.crazygames.com/embed/we-become-what-we-behold" allowfullscreen allow="gamepad *;"></iframe>
-      </div>
-      
-      <!-- Game 3 -->
-      <div class="game-container">
-        <div class="game-title">Super Basketball</div>
-        <iframe class="game-iframe" src="https://www.crazygames.com/embed/super-basketball" allowfullscreen allow="gamepad *;"></iframe>
-      </div>
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/racing-limits')">
+            <div class="game-title">Racing Limits</div>
+        </div>
+        
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/football-battle')">
+            <div class="game-title">Football Battle</div>
+        </div>
 
-      <!-- Game 4 -->
-      <div class="game-container">
-        <div class="game-title">Tank Trouble</div>
-        <iframe class="game-iframe" src="https://www.crazygames.com/embed/tank-trouble" allowfullscreen allow="gamepad *;"></iframe>
-      </div>
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/super-basketball')">
+            <div class="game-title">Super Basketball</div>
+        </div>
 
-      <!-- Game 5 -->
-      <div class="game-container">
-        <div class="game-title">Slope Run Game</div>
-        <iframe class="game-iframe" src="https://www.crazygames.com/embed/slope-run-game" allowfullscreen allow="gamepad *;"></iframe>
-      </div>
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/tank-trouble')">
+            <div class="game-title">Tank Trouble</div>
+        </div>
 
-      <!-- Game 6 -->
-      <div class="game-container">
-        <div class="game-title">Wormax.io</div>
-        <iframe class="game-iframe" src="https://www.crazygames.com/embed/wormax-io" allowfullscreen allow="gamepad *;"></iframe>
-      </div>
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/slope-run-game')">
+            <div class="game-title">Slope Run Game</div>
+        </div>
 
-      <!-- Game 7 -->
-      <div class="game-container">
-        <div class="game-title">Minecraft Classic</div>
-        <iframe class="game-iframe" src="https://www.crazygames.com/embed/minecraft-classic" allowfullscreen allow="gamepad *;"></iframe>
-      </div>
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/wormax-io')">
+            <div class="game-title">Wormax.io</div>
+        </div>
+
+        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/minecraft-classic')">
+            <div class="game-title">Minecraft Classic</div>
+        </div>
     </main>
 
+    <div id="fullscreen-container" class="fullscreen-container">
+        <button class="close-btn" onclick="closeFullscreenGame()">Close</button>
+        <iframe id="fullscreen-iframe" allowfullscreen allow="gamepad *;"></iframe>
+    </div>
+
     <footer>
-      <p>&copy; 2025 Unblocked Games. All rights reserved.</p>
+        <p>&copy; 2025 Unblocked Games. All rights reserved.</p>
     </footer>
-  </body>
+</body>
 </html>
