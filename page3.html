@@ -4,36 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unblocked Games</title>
-    
-    <!-- Favicon -->
     <link id="favicon" rel="icon" href="https://pngimg.com/d/chrome_logo_PNG18.png">
-
-    <script>
-        // Function to change favicon and tab title
-        function changeTabInfo(iconURL, newTitle) {
-            const favicon = document.getElementById('favicon') || document.createElement('link');
-            favicon.id = 'favicon';
-            favicon.rel = 'icon';
-            favicon.href = iconURL;
-            document.head.appendChild(favicon);
-
-            document.title = newTitle;
-
-            // Save to localStorage for persistence
-            localStorage.setItem('selectedIcon', iconURL);
-            localStorage.setItem('selectedTitle', newTitle);
-        }
-
-        // Restore saved favicon and title on load
-        window.addEventListener('load', () => {
-            const savedIcon = localStorage.getItem('selectedIcon');
-            const savedTitle = localStorage.getItem('selectedTitle');
-
-            if (savedIcon) {
-                changeTabInfo(savedIcon, savedTitle);
-            }
-        });
-    </script>
     
     <style>
         /* Global Styles */
@@ -165,7 +136,40 @@
             color: #0A8E29;
             box-shadow: 0 4px 6px rgba(0, 255, 0, 0.7);
         }
+
+        /* Settings Panel */
+        .settings-panel {
+            display: none;
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background: #1e1e1e;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+        }
     </style>
+
+    <script>
+        function openFullscreenGame(gameUrl) {
+            const fullscreenDiv = document.getElementById('fullscreen-container');
+            const gameFrame = document.getElementById('fullscreen-iframe');
+            gameFrame.src = gameUrl;
+            fullscreenDiv.style.display = 'flex';
+        }
+
+        function closeFullscreenGame() {
+            const fullscreenDiv = document.getElementById('fullscreen-container');
+            const gameFrame = document.getElementById('fullscreen-iframe');
+            gameFrame.src = '';
+            fullscreenDiv.style.display = 'none';
+        }
+
+        function toggleSettings(show) {
+            document.getElementById('settings-panel').style.display = show ? 'block' : 'none';
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -180,10 +184,6 @@
         <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/racing-limits')">
             <div class="game-title">Racing Limits</div>
         </div>
-        
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/football-battle')">
-            <div class="game-title">Football Battle</div>
-        </div>
     </main>
 
     <div id="fullscreen-container" class="fullscreen-container">
@@ -195,5 +195,14 @@
     <div class="settings-icon" onmouseover="toggleSettings(true)" onmouseout="toggleSettings(false)">
         ⚙️
     </div>
+    
+    <!-- Settings Panel -->
+    <div id="settings-panel" class="settings-panel">
+        <p>Settings go here...</p>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Unblocked Games. All rights reserved.</p>
+    </footer>
 </body>
 </html>
