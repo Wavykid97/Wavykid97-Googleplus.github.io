@@ -155,7 +155,6 @@
         function openFullscreenGame(gameUrl) {
             const fullscreenDiv = document.getElementById('fullscreen-container');
             const gameFrame = document.getElementById('fullscreen-iframe');
-
             gameFrame.src = gameUrl;
             fullscreenDiv.style.display = 'flex';
         }
@@ -163,13 +162,16 @@
         function closeFullscreenGame() {
             const fullscreenDiv = document.getElementById('fullscreen-container');
             const gameFrame = document.getElementById('fullscreen-iframe');
-
             gameFrame.src = '';
             fullscreenDiv.style.display = 'none';
         }
 
-        function toggleSettings(show) {
-            document.getElementById('settings-panel').style.display = show ? 'block' : 'none';
+        function showSettings() {
+            document.getElementById('settings-panel').style.display = 'block';
+        }
+
+        function hideSettings() {
+            document.getElementById('settings-panel').style.display = 'none';
         }
     </script>
 </head>
@@ -186,30 +188,6 @@
         <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/racing-limits')">
             <div class="game-title">Racing Limits</div>
         </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/football-battle')">
-            <div class="game-title">Football Battle</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/super-basketball')">
-            <div class="game-title">Super Basketball</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/tank-trouble')">
-            <div class="game-title">Tank Trouble</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/slope-run-game')">
-            <div class="game-title">Slope Run Game</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/wormax-io')">
-            <div class="game-title">Wormax.io</div>
-        </div>
-
-        <div class="game-container" onclick="openFullscreenGame('https://www.crazygames.com/embed/minecraft-classic')">
-            <div class="game-title">Minecraft Classic</div>
-        </div>
     </main>
 
     <div id="fullscreen-container" class="fullscreen-container">
@@ -218,12 +196,12 @@
     </div>
 
     <!-- Settings Icon -->
-    <div class="settings-icon" onmouseover="toggleSettings(true)" onmouseout="toggleSettings(false)">
+    <div class="settings-icon" onmouseenter="showSettings()">
         ⚙️
     </div>
     
     <!-- Settings Panel -->
-    <div id="settings-panel" class="settings-panel">
+    <div id="settings-panel" class="settings-panel" onmouseenter="showSettings()" onmouseleave="hideSettings()">
         <p>Settings go here...</p>
     </div>
 
